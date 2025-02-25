@@ -186,11 +186,17 @@
         };
 
         function venmoEric() {
-            window.open('https://venmo.com/u/eric-pulse', '_blank');
-            setTimeout(() => {
-                document.querySelectorAll('.counter span').forEach(span => span.textContent = '0');
-                updateTotal();
-            }, 5000);
+            let total = updateTotal();
+            if (total > 0) {
+                let venmoLink = `https://venmo.com/u/eric-pulse?txn=pay&amount=${total}`;
+                window.open(venmoLink, '_blank');
+                setTimeout(() => {
+                    document.querySelectorAll('.counter span').forEach(span => span.textContent = '0');
+                    updateTotal();
+                }, 5000);
+            } else {
+                alert("Total must be greater than $0 to proceed with payment.");
+            }
         }
     </script>
 </head>
