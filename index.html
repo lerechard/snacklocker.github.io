@@ -189,8 +189,8 @@
         function venmoEric() {
             let total = updateTotal();
             if (total > 0) {
-                let venmoLink = `https://venmo.com/?txn=pay&audience=friends&recipients=eric-pulse&amount=${total}&note=website%20designed%20by%20Charlie%20C`;//${total}
-                window.open(venmoLink, '_blank');
+                let venmoLink = `https://venmo.com/?txn=pay&audience=friends&recipients=Eric-pulse&amount=${total}&note=Snack%20Locker`;//${total}
+                window.location.href = venmoLink;
                 setTimeout(() => {
                     document.querySelectorAll('.counter span').forEach(span => span.textContent = '0');
                     updateTotal();
