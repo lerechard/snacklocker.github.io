@@ -189,8 +189,7 @@
         function venmoEric() {
             let total = updateTotal();
             if (total > 0) {
-                let venmoLink = `https://venmo.com/u/eric-pulse?txn=pay&amount=${total}`;
-                window.open(venmoLink, '_blank');
+                let venmoLink = `https://venmo.com/?txn=pay&audience=friends&recipients=eric-pulse&amount=${total}&note=Snack Locker`;
                 setTimeout(() => {
                     document.querySelectorAll('.counter span').forEach(span => span.textContent = '0');
                     updateTotal();
