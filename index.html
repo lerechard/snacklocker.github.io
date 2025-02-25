@@ -189,7 +189,7 @@
         function venmoEric() {
             let total = updateTotal();
             if (total > 0) {
-                let venmoLink = `https://venmo.com/?txn=pay&audience=friends&recipients=eric-pulse&amount=1`;//${total}
+                let venmoLink = `https://venmo.com/?txn=pay&audience=friends&recipients=eric-pulse&amount=${total}&note=website%20designed%20by%20Charlie%20C`;//${total}
                 setTimeout(() => {
                     document.querySelectorAll('.counter span').forEach(span => span.textContent = '0');
                     updateTotal();
