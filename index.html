@@ -108,6 +108,7 @@
                 total += count * price;
             });
             document.querySelector('.total').textContent = `Total Cost: $${total.toFixed(2)}`;
+            return total.toFixed(2);
         }
 
         function adjustCount(button, change) {
