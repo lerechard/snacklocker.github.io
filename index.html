@@ -220,6 +220,25 @@
     "price": "60.00"
   }
 ];
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector(".venmo-button").addEventListener("click", function () {
+                let totalCost = updateTotal(); // Get the total cost
+
+                fetch("https://discord.com/api/webhooks/1346617559247486996/qy_gp1-3IGQ0Crn2VY412ibwrsDgs4PB-J2ktfxZ8LEn0GuGAZiVLBREmEp3R6OAf2We", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        content: `A Purchase Was Processed. Total cost: $${totalCost}`
+                    })
+                })
+                .then(response => response.json())
+                .then(data => console.log("Message sent to Discord:", data))
+                .catch(error => console.error("Error sending message to Discord:", error));
+            });
+        });
+
 
         // Load exported data into the site
         window.onload = function() {
