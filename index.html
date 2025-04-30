@@ -118,24 +118,27 @@
             updateTotal();
         }
         function loadItemsFromExport(data) {
-            let grid = document.querySelector('.grid');
-            data.forEach(item => {
-                let newItem = document.createElement('div');
-                newItem.className = 'item';
-                newItem.dataset.price = item.price;
-                newItem.innerHTML = `
-                    <img src="${item.image}" alt="Item">
-                    <div class="marquee"><marquee behavior="scroll" direction="left">${item.description}</marquee></div>
-                    <div class="price">$${item.price}</div>
-                    <div class="counter">
-                        <button onclick="adjustCount(this, -1)">-</button>
-                        <span>0</span>
-                        <button onclick="adjustCount(this, 1)">+</button>
-                    </div>
-                `;
-                grid.appendChild(newItem);
-            });
-        }
+    let grid = document.querySelector('.grid');
+    data.forEach(item => {
+        let newItem = document.createElement('div');
+        newItem.className = 'item';
+        newItem.dataset.price = item.price;
+        newItem.innerHTML = `
+            <img src="${item.image}" alt="Item">
+            <div class="marquee"><marquee behavior="scroll" direction="left">${item.description}</marquee></div>
+            <div class="price">$${item.price}</div>
+            <div class="counter">
+                <button onclick="adjustCount(this, -1)">-</button>
+                <span>0</span>
+                <button onclick="adjustCount(this, 1)">+</button>
+            </div>
+            <button onclick="reportSoldOut('${item.description.replace(/'/g, "\\'")}')" style="margin-top:10px; padding:6px 12px; border:none; border-radius:6px; background-color:#FF6347; color:white; cursor:pointer;">
+                Report Sold Out
+            </button>
+        `;
+        grid.appendChild(newItem);
+    });
+}
 
         // Example exported JSON data (Replace this with actual copied data)
         let exportedData = [
@@ -295,6 +298,26 @@
                 alert("Total must be greater than $0 to proceed with payment.");
             }
         }
+        function reportSoldOut(itemName) {
+    fetch("https://discord.com/api/webhooks/1367230332390211705/KWoFRUEfazdu-clduLLTDPBz0Ur8_uPYEMCUx6OrTNMIiIq5cFHVY-vop81t7nHwDm1O", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content: `${itemName} SOLD OUT!`
+        })
+    })
+    .then(response => {
+        if (!response.ok) throw new Error("Failed to send webhook");
+        alert(`${itemName} marked as SOLD OUT!`);
+    })
+    .catch(error => {
+        console.error("Error sending sold out message:", error);
+        alert("Failed to report sold out item.");
+    });
+}
+
     </script>
 </head>
 <body>
