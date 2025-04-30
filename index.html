@@ -132,9 +132,10 @@
                 <span>0</span>
                 <button onclick="adjustCount(this, 1)">+</button>
             </div>
-            <button onclick="reportSoldOut('${item.description.replace(/'/g, "\\'")}')" style="margin-top:10px; padding:6px 12px; border:none; border-radius:6px; background-color:#FF6347; color:white; cursor:pointer;">
+            <button onclick="reportSoldOutAndMark(this, '${item.description.replace(/'/g, "\\'")}')" style="margin-top:10px; padding:6px 12px; border:none; border-radius:6px; background-color:#FF6347; color:white; cursor:pointer;">
                 Report Sold Out
             </button>
+
         `;
         grid.appendChild(newItem);
     });
@@ -317,6 +318,41 @@
         alert("Failed to report sold out item.");
     });
 }
+        function markItemSoldOut(button, itemName) {
+    const itemDiv = button.closest('.item');
+    
+    // Grey out the item visually
+    itemDiv.style.opacity = "0.5";
+    itemDiv.style.filter = "grayscale(100%)";
+
+    // Change the marquee text to sold out message
+    const marquee = itemDiv.querySelector('.marquee marquee');
+    marquee.textContent = `${itemName} sold out :(`;
+
+    // Remove the report button
+    button.remove();
+}
+        function reportSoldOutAndMark(button, itemName) {
+    fetch("https://discord.com/api/webhooks/1367230332390211705/KWoFRUEfazdu-clduLLTDPBz0Ur8_uPYEMCUx6OrTNMIiIq5cFHVY-vop81t7nHwDm1O", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content: `${itemName} SOLD OUT!`
+        })
+    })
+    .then(response => {
+        if (!response.ok) throw new Error("Failed to send webhook");
+        markItemSoldOut(button, itemName);
+    })
+    .catch(error => {
+        console.error("Error sending sold out message:", error);
+        alert("Failed to report sold out item.");
+    });
+}
+
+
 
     </script>
 </head>
