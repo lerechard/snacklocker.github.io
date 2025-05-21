@@ -21,6 +21,15 @@
       background-color: #87CEFA;
       color: white;
     }
+   }
+   .alert {
+      font-size: 24px;
+      font-weight: bold;
+      padding: 16px;
+      background-color: #ff948c;
+      color: red;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -128,7 +137,7 @@
     }
 
     function reportSoldOutAndMark(button, itemName) {
-      fetch("https://discord.com/api/webhooks/1367230332390211705/KWoFRUEfazdu-clduLLTDPBz0Ur8_uPYEMCUx6OrTNMIiIq5cFHVY-vop81t7nHwDm1O", {
+      fetch("", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: `${itemName} SOLD OUT!` })
@@ -208,7 +217,7 @@
     document.addEventListener("DOMContentLoaded", function () {
       document.querySelector(".venmo-button").addEventListener("click", function () {
         let totalCost = updateTotal();
-        fetch("https://discord.com/api/webhooks/1346617559247486996/qy_gp1-3IGQ0Crn2VY412ibwrsDgs4PB-J2ktfxZ8LEn0GuGAZiVLBREmEp3R6OAf2We", {
+        fetch("", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ content: `A Purchase Was Processed. Total cost: $${totalCost}` })
@@ -238,6 +247,7 @@
 </head>
 <body>
   <div class="title">M60 Snack Locker</div>
+  <div class="notif">due to web scraping and other troll activities, analytics are currently disabled. to report an item as sold out please contact Charlie or Maddie via slack</div>
   <div class="grid"></div>
   <div class="bottom-bar">
     <div class="total">Total Cost: $0.00</div>
