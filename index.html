@@ -176,10 +176,16 @@
             <span>0</span>
             <button onclick="adjustCount(this, 1)">+</button>
           </div>
-          ${!isSoldOut ? `
+        //   ${!isSoldOut ? `
+        //     <button onclick="reportSoldOutAndMark(this, '${item.description.replace(/'/g, "\\'")}')" 
+        //       style="margin-top:10px; padding:6px 12px; border:none; border-radius:6px; background-color:#FF6347; color:white; cursor:pointer;">
+        //       Report Sold Out
+        //     </button>` : ``}
+        // `;
+        ${!isSoldOut ? `
             <button onclick="reportSoldOutAndMark(this, '${item.description.replace(/'/g, "\\'")}')" 
               style="margin-top:10px; padding:6px 12px; border:none; border-radius:6px; background-color:#FF6347; color:white; cursor:pointer;">
-              Report Sold Out
+              I Took The Last One
             </button>` : ``}
         `;
         grid.appendChild(newItem);
@@ -258,6 +264,7 @@
   </div>
 </body>
 </html>
+
 
 
 
